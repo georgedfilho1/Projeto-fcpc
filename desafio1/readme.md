@@ -36,15 +36,13 @@ A rede personalizada permite que os containers se descubram automaticamente via 
 
 ## 2.1 Visão geral
 
-```mermaid
 flowchart LR
-    Cliente[Container Cliente\n(curl loop)] -->|HTTP GET| Servidor[Container Servidor\n(Nginx)]
-    
-    subgraph Rede Docker Customizada (minha-rede-customizada)
+    Cliente[Container cliente curl loop] -->|"HTTP GET"| Servidor[Container servidor Nginx]
+
+    subgraph RedeDockerCustomizada
         Servidor
         Cliente
     end
-````
 
 ## 2.2 Componentes
 

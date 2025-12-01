@@ -46,18 +46,17 @@ A persistência é garantida pelo **volume nomeado** `dados-pg-compose`, que é 
 - **Volume nomeado**
   - `dados-pg-compose` → mapeado em `/var/lib/postgresql/data` dentro do contêiner `banco`.
 
-### 2.2 Diagrama (Mermaid)
+### 2.2 Diagrama 
 
-```mermaid
 graph LR
-    User((Usuário)) -->|HTTP :8080| PGAdmin[pgAdmin 4\n(Interface Web)]
-    User -->|TCP :5432| BancoHost[(Porta 5432 Host)]
+    User[Usuario] -->|"HTTP :8080"| PGAdmin[pgAdmin 4 web]
+    User -->|"TCP :5432"| BancoHost[Host port 5432]
 
-    subgraph Docker Network (default)
-        PGAdmin -->|Host=banco:5432| Banco[PostgreSQL\nContainer: pg-compose]
-        Banco --- Volume[(Volume: dados-pg-compose)]
+    subgraph DockerNetworkDefault
+        PGAdmin -->|"Host=banco:5432"| Banco[PostgreSQL pg-compose]
+        Banco --- Volume[Volume dados-pg-compose]
     end
-````
+
 
 ---
 

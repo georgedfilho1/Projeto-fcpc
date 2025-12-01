@@ -22,15 +22,15 @@ A comunicação é síncrona via HTTP. Ambos os serviços rodam dentro de uma **
 
 ### Diagrama
 
-```mermaid
 graph LR
-    User((Usuário)) -- HTTP GET :5001/relatorio --> ServiceB[Service B\n(Consumer)]
-    subgraph Docker Network
-        ServiceB -- HTTP GET :5000/users --> ServiceA[Service A\n(Producer)]
+    User[Usuario] -- "HTTP GET :5001/relatorio" --> ServiceB[Service B (consumer)]
+
+    subgraph DockerNetwork
+        ServiceB -- "HTTP GET :5000/users" --> ServiceA[Service A (producer)]
         ServiceA -- JSON --> ServiceB
     end
-    ServiceA -.-> DB[(Dados Mockados)]
-```
+
+    ServiceA -.-> DB[Mock data]
 
 ---
 

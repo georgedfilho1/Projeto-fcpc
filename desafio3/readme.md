@@ -10,22 +10,17 @@ A aplicação segue uma arquitetura de microsserviços simplificada, onde cada r
 
 ### **Diagrama de Comunicação**
 
-```mermaid
 graph TD
-    User((User / Browser)) -->|Porta 5000:5000| Web[Serviço: WEB (Flask)]
-    Web -->|Lê/Escreve| Cache[Serviço: CACHE (Redis)]
-    Web -->|Verifica Conexão| DB[Serviço: DB (PostgreSQL)]
-    
-    subgraph "Docker Network: minha-rede-interna"
+    User[User / Browser] -->|"port 5000:5000"| Web[WEB Flask]
+    Web -->|"read/write"| Cache[Redis cache]
+    Web -->|"check connection"| DB[PostgreSQL DB]
+
+    subgraph DockerNetwork_minha_rede_interna
         Web
         Cache
         DB
     end
 
-    style Web fill:#f9f,stroke:#333,stroke-width:2px
-    style Cache fill:#ff9,stroke:#333,stroke-width:2px
-    style DB fill:#9cf,stroke:#333,stroke-width:2px
-```
 
 ---
 

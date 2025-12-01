@@ -42,15 +42,14 @@ A comunicação ocorre da seguinte forma:
 
 ## **Diagrama de Arquitetura**
 
-```mermaid
 graph TD
-    User((Cliente)) -->|HTTP :4000| Gateway[API Gateway\nporta interna 8080]
-    
-    subgraph Docker Network: "minha-rede"
-        Gateway -->|GET /users| UsersService[Users Service\nporta interna 5000]
-        Gateway -->|GET /orders| OrdersService[Orders Service\nporta interna 5000]
+    User[Cliente] -->|"HTTP :4000"| Gateway[API Gateway (porta interna 8080)]
+
+    subgraph DockerNetwork_minha_rede
+        Gateway -->|"GET /users"| UsersService[Users Service (porta 5000)]
+        Gateway -->|"GET /orders"| OrdersService[Orders Service (porta 5000)]
     end
-```
+
 
 ---
 
