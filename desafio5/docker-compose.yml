@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Serviço de Usuários (Interno - sem porta exposta para fora)
+  users_service:
+    build: ./service-users
+    container_name: users_container
+    networks:
+      - minha-rede
+
+  # Serviço de Pedidos (Interno - sem porta exposta para fora)
+  orders_service:
+    build: ./service-orders
+    container_name: orders_container
+    networks:
+      - minha-rede
+
+  # API Gateway (Público - Porta 4000 mapeada para 8080)
+  gateway:
+    build: ./gateway
+    container_name: gateway_container
+    ports:
+      - "4000:8080"
+    depends_on:
+      - users_service
+      - orders_service
+    networks:
+      - minha-rede
+
+networks:
+  minha-rede:
+    driver: bridge

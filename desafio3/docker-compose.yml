@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Serviço 1: Aplicação Web
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    networks:
+      - minha-rede-interna
+    depends_on:
+      - db
+      - cache
+    environment:
+      - REDIS_HOST=cache
+      - DB_HOST=db
+      - POSTGRES_DB=meubanco
+      - POSTGRES_USER=usuario
+      - POSTGRES_PASSWORD=senha_secreta
+
+  # Serviço 2: Banco de Dados (PostgreSQL)
+  db:
+    image: postgres:13-alpine
+    networks:
+      - minha-rede-interna
+    environment:
+      - POSTGRES_DB=meubanco
+      - POSTGRES_USER=usuario
+      - POSTGRES_PASSWORD=senha_secreta
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Serviço 3: Cache (Redis)
+  cache:
+    image: redis:alpine
+    networks:
+      - minha-rede-interna
+
+networks:
+  minha-rede-interna:
+    driver: bridge
+
+volumes:
+  postgres_data:
